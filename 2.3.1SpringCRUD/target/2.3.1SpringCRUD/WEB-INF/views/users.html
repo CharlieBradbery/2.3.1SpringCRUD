@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<a href="../../index.jsp">Back to main menu</a>
+<br/>
+<br/>
+<h1>List of users</h1>
+
+
+
+<table cellpadding="10" border="1">
+    <tr>
+        <th th:width="50">ID</th>
+        <th th:width="140">Name</th>
+        <th th:width="140">Lastname</th>
+        <th th:width="80">Age</th>
+        <th th:width="70">Edit</th>
+        <th th:width="70">Delete</th>
+    </tr>
+    <tr th:each="us: ${users}">
+        <td th:text="${us.id}">ID</td>
+        <td th:text="${us.name}">Name</td>
+        <td th:text="${us.lastname}">Lastname</td>
+        <td th:text="${us.age}">Age</td>
+        <td> <a th:href="@{/users/{id}/edit(id=${us.getId()})}">Edit </a></td>
+        <td> <form th:method="DELETE" th:action="@{/users/{id}/(id=${us.getId()})}">
+            <input type="submit" value="Delete"/></form>
+        </form>
+        </td>
+
+    </tr>
+
+</table>
+
+
+<h1>Create new user</h1>
+
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
+    <label for="name">Enter name</label>
+    <input type="text" th:field = "*{name}" id="name"/>
+    <br>
+    <label for="lastname">Enter lastname</label>
+    <input type="text" th:field = "*{lastname}" id="lastname"/>
+    <br>
+    <label for="age">Enter age</label>
+    <input type="text" th:field = "*{age}" id="age"/>
+    <br>
+    <input type="submit" value = "Create"/>
+</form>
+
+</body>
+</html>
